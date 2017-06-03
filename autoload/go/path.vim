@@ -129,7 +129,11 @@ function! go#path#BinPath() abort
     let bin_path = $GOBIN
   else
     let go_paths = split(go#path#Default(), go#util#PathListSep())
-    let bin_path = expand(go_paths[0] . "/bin/")
+    if len(go_paths)
+      let bin_path = expand(go_paths[0] . "/bin/")
+    else
+      let bin_path = ""
+    endif
   endif
 
   return bin_path
